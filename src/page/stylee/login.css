@@ -1,0 +1,164 @@
+.container_login_Box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh; /* Make sure the container takes full height of the viewport */
+    background: white;
+}
+
+.Login_Box1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(23, 59, 69, 0.5); 
+    width: 350px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.Logo_Login {
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+}
+
+.Logo_Login a {
+    display: flex;
+    font-family: "Rubik Mono One", monospace;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #173B45;
+}
+
+.Text_login {
+    text-align: center;
+}
+
+.Text_login h1 {
+    font-family: "Rubik Mono One", monospace;
+    font-size: 16px;
+    color: black;
+    font-weight: 400;
+}
+
+.Text_login p {
+    font-family: "Rubik Mono One", monospace;
+    font-size: 10px;
+    color: #333;
+    font-weight: 200;
+}
+
+/* form login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-form {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 12px;
+    color: #333;
+    text-align: left; /* Align text to the left */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Efek fokus pada input */
+.form-group input:focus {
+    border-color: #173B45; /* Ubah warna border saat fokus */
+    box-shadow: 0 0 5px rgba(23, 59, 69, 0.5); 
+    outline: none; 
+}
+
+.login-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.register-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.text_login_or {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.text_login_or .garis1, .text_login_or .garis2 {
+    flex: 1;
+    height: 1px;
+    background-color: gray;
+    margin: 0 10px;
+}
+
+
+
+.password-input-container {
+    position: relative;
+}
+
+.password-input-container input {
+    padding-right: 40px; /* Space for the eye icon */
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}

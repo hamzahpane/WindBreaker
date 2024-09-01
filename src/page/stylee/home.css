@@ -1,0 +1,92 @@
+
+.container_home{
+    margin: 30px 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 85vh;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2) url('../../Img/backgound.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.trasnparan_hero{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1); /* Hitam dengan transparansi 50% */
+    align-items: flex-start;
+    align-items: flex-start;
+    
+}
+
+.Text_hero{
+    align-items: flex-start;
+    margin-top: 20px ;
+    padding: 20px 30px;
+    align-items: flex-start;
+    width: 40%;
+    height: 70%;
+    
+}
+
+
+.Text_hero h1{
+    font-size: 30px;
+    font-family: "Rubik Mono One", monospace;
+    color: #F0F0F0; /* Putih krem yang sedikit lebih gelap dari putih murni */
+
+}
+.Text_hero text{
+    font-size: 11px;
+    font-weight: 200;
+    font-family: "Rubik Mono One", monospace;
+    color: #333333; /* Putih krem yang sedikit lebih gelap dari putih murni */
+}
+
+.Text_hero a {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 10px 10px;
+    font-size: 13px;
+    font-family: "Rubik Mono One", monospace;
+    text-decoration: none;
+    color: #FFFFFF; /* Warna teks tombol */
+    background-color:  #173B45;; /* Warna latar belakang tombol */
+    border-radius: 10px; /* Sudut melengkung tombol */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transisi halus */
+}
+
+.Text_hero a:hover {
+    background-color: #1E4A5A; /* Warna latar belakang tombol saat hover */
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+
+
+@media (max-width: 760px){
+
+    .Text_hero{
+        width: 40%;
+        height: 80%;
+        
+    }
+    
+    
+    .Text_hero h1{
+        font-size: 20px;
+    
+    }
+    .Text_hero text{
+        font-size: 8px;
+    
+    }
+    
+    .Text_hero a {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 10px;
+        font-size: 10px;
+    }   
+
+}
+

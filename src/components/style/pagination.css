@@ -1,0 +1,37 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-family: "Rubik Mono One", monospace;
+}
+
+
+.pagination button {
+    background-color: black; /* Mengubah background menjadi hitam */
+    color: white; /* Mengubah warna tulisan menjadi putih */
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    padding: 5px 10px;
+    font-family: "Rubik Mono One", monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+.pagination button:disabled {
+    background-color: #444; /* Mengubah warna background tombol yang tidak aktif menjadi abu-abu gelap */
+    color: #888; /* Mengubah warna tulisan tombol yang tidak aktif menjadi abu-abu */
+    cursor: not-allowed;
+}
+
+.pagination button.active {
+    background-color: white; /* Mengubah warna background tombol aktif menjadi putih */
+    color: black; /* Mengubah warna tulisan tombol aktif menjadi hitam */
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: white; /* Mengubah warna background tombol saat di-hover menjadi putih */
+    color: black; /* Mengubah warna tulisan tombol saat di-hover menjadi hitam */
+}

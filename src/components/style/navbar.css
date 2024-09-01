@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Playwrite+FR+Moderne:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Playwrite+FR+Moderne:wght@100..400&family=Rubik+Mono+One&display=swap');
+
+
+.Navbar_Container {
+  padding: 15px 50px;
+  margin-top: 0px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 15px(0, 0 , 0 , 0.6) ;
+  border-radius: 10px;
+  z-index: 50;
+}
+
+.Logo {
+    display: flex;
+
+}
+
+
+.Logo a{
+    display: flex;
+    font-family: "Rubik Mono One", monospace;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #173B45;
+}
+
+
+#Navbar {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#Navbar li {
+  font-size: 14px;
+  list-style-type: none;
+  }
+
+
+#Navbar li a {
+  text-decoration: none;
+  font-family: "Rubik Mono One", monospace;
+  font-weight: 200;
+  font-size: 12px;
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+#Navbar  li a:hover , #Navbar  li a.active {
+  color: #021526;
+  font-family: "Rubik Mono One", monospace;
+  font-weight: 200;
+}
+
+.navlink.active {
+  color: #021526;
+  text-decoration: underline;
+}
+
+
+
+#Menu-icons{
+    display: none;
+}
+
+
+#cart_login{
+    gap: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.cart-item{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+  background: white;
+  text-decoration: none;
+  color: #021526;
+  border: none;
+  }
+  
+/* File: navbar.css */
+@keyframes cartNotification {
+  0% {
+      transform: scale(1);
+      opacity: 1;
+  }
+  50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+.cart-item-container {
+  position: relative;
+  border: none;
+}
+
+.cart-item-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  padding: 1px 4px;
+  font-size: 7px;
+  font-weight: bold;
+  animation: cartNotification 0.5s ease;
+}
+
+.cart-item-container.new-product .cart-item-count {
+  animation: cartNotification 0.5s ease;
+}
+
+.button_login{
+      display: inline-block;
+        padding: 5px 10px;
+        background:white ;
+        color: #021526;
+        font-family: "Rubik Mono One", monospace;
+        font-size: 10px;
+        font-style: normal;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid #021526;
+        border-radius: 5px;
+        transition: color 0.3s ease;
+        cursor: pointer;
+}
+
+.button_login:hover{
+    background:#021526;
+        color: white;
+}
+@media (max-width: 760px) {
+    .Navbar_Container {
+        padding: 15px 20px;
+    }
+
+    #Navbar {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;  
+      position: fixed;
+        top: 60px;
+        right: -400px;
+        width: 300px;
+        height: 100vh;
+        background: black;
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.6);
+        padding: 40px 0 0 10px;
+        transition: right 0.3s ease; /* Smooth transition for sliding effect */
+    }
+
+    #Navbar  li a:hover , #Navbar  li a.active {
+    color: white;
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 200;
+    }
+
+    #Navbar.active {
+        right: 0;
+    }
+
+    #Menu-icons {
+        display: block;
+    }
+
+    #cart_login{
+        gap: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+    
+}
+
+
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.button_profile {
+  background: none;
+  font-family: "Rubik Mono One", monospace;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  right: 0;
+  color: black;
+  font-weight: bold;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 5px 5px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.dropdown-menu a{
+  text-decoration: none;
+  padding: 5px 5px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  color: black;
+  
+}
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* style/navbar.css */
+
+.custom-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.alert-content {
+  background-color: white;
+  color: black;  /* Tulisan putih */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.alert-content p {
+  margin-top: 80px;
+  font-family: "Rubik Mono One", monospace;
+  font-size: 12px;
+}
+
+.alert-content button {
+  background-color: #000;  /* Button hitam */
+  color: #fff;  /* Tulisan putih */
+  
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.alert-content button:hover {
+  background-color: #333;  /* Sedikit lebih terang saat di-hover */
+}
+
+.alert-buttons button{
+  margin-right: 30px;
+  margin-left: 30px;
+  font-family: "Rubik Mono One", monospace;
+  font-size: 8px;
+}
