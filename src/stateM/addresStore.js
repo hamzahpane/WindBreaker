@@ -4,8 +4,8 @@ export const useAddressStore = create((set) => ({
     address: {
     kecamatan: '',
     kelurahan: '',
-    kabupaten: ''
-
+    kabupaten: '',
+    alamat :''
 },
 
 setAddress: (newAddress) => set({ address: newAddress }),
@@ -19,7 +19,8 @@ updateAddressField: (field, value) => set((state) => ({
     address: {
     kecamatan: '',
     kelurahan: '',
-    kabupaten: ''
+    kabupaten: '',
+    alamat :''
     }
 })
 }));

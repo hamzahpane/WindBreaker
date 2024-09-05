@@ -1,60 +1,81 @@
-import React, {  useEffect ,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import './stylee/Invoice.css';
-import { NavLink } from 'react-router-dom';
-import CreateInvo from '../components/CreateInvoice';
-import ReadInvoice from '../components/ReadInvoice'; // Komponen baru untuk menampilkan invoice yang sudah dibuat
 import Loading from './Loading';
+import { NavLink } from 'react-router-dom';
+import { getInvoice } from '../app/api/invoice';
 
 const Invoice = () => {
-  // State untuk mengelola tab yang aktif ("create" atau "read")
-  const [activeTab, setActiveTab] = useState('create');
-  const [createdInvoices, setCreatedInvoices] = useState([]); // State untuk menyimpan invoice yang sudah dibuat
-  const [loading ,  setLoading] = useState(true);
+  const token = localStorage.getItem('Token');
+  const [loading, setLoading] = useState(true);
+  const [invoices, setInvoices] = useState([]);
 
-  const handleCreateInvoice = (newInvoice) => {
-    setCreatedInvoices([...createdInvoices, newInvoice]); // Tambahkan invoice baru ke daftar createdInvoices
-  };
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      try {
+        const response = await getInvoice(token);
+        console.log(response.data); // Memeriksa struktur data yang diterima
+        setInvoices(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching invoices:', error);
+        setLoading(false);
+      }
+    };
 
-   // Simulasi data loading
-   useEffect(() => {
-    // Simulasi loading
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000); // Ganti dengan waktu loading yang sesuai
-  }, []);
+    fetchInvoices();
+  }, [token]);
 
   if (loading) {
     return <Loading />; // Menampilkan halaman loading saat data sedang dimuat
   }
+
   return (
     <div className="invoice-container">
       <div className="HeaderInvoice">
         <NavLink to="/Menu"><FaArrowLeft /> Back to Menu</NavLink>
       </div>
 
-      <div className="ContainerInvoice">
-        {/* Tombol untuk memilih tab */}
-        <button
-          className={`invoice-button ${activeTab === 'create' ? 'active' : ''}`}
-          onClick={() => setActiveTab('create')}
-        >
-          Create Invoice
-        </button>
-        <button
-          className={`invoice-button ${activeTab === 'read' ? 'active' : ''}`}
-          onClick={() => setActiveTab('read')}
-        >
-          Read Invoice
-        </button>
+      <div className='ContainerInvoice'> 
+        <button className='invoice-button'>Read Invoice</button>
       </div>
 
-      {/* Konten yang ditampilkan berdasarkan tab yang aktif */}
-      <div className="containerbox">
-        {activeTab === 'create' ? (
-          <CreateInvo setCreatedInvoice={handleCreateInvoice} createdInvoices={createdInvoices} />
+      <div className='containerbox'> 
+        {invoices.length > 0 ? (
+          <table className="invoice-table">
+            <thead>
+              <tr>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Delivery Address</th>
+                <th>Items</th>
+                <th>Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoices.map(invoice => (
+                <tr key={invoice._id}>
+                  <td>{new Date(invoice.order.orderDate).toLocaleDateString()}</td>
+                  <td>{invoice.order.totalAmount}</td>
+                  <td>
+                    {invoice.order.deliveryAddress.alamat}, {invoice.order.deliveryAddress.kecamatan}, {invoice.order.deliveryAddress.kelurahan}, {invoice.order.deliveryAddress.kabupaten}
+                  </td>
+                  <td>
+                    <ul>
+                      {invoice.order.orderItems.map(item => (
+                        <li key={item._id}>
+                          {item.name} - {item.quantity} x ${item.price}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>{invoice.order.payment}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
-          <ReadInvoice createdInvoices={createdInvoices} /> // Menampilkan invoice yang sudah dibuat
+          <p>No invoices found.</p>
         )}
       </div>
     </div>

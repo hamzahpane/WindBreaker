@@ -5,17 +5,21 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAddressStore } from '../stateM/addresStore';
 import Pagination from '../components/Pagination';
 import { useStoreproduct } from '../stateM/productStore';
-import { postordersItem } from '../app/api/orderItem';
 import Loading from './Loading';
+import { getpay } from '../app/api/payment';
+import { createOrder } from '../app/api/order';
 
 const Order = () => {
   const { address, updateAddressField, clearAddress } = useAddressStore();
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentOptions, setPaymentOptions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('Token');
   const navigate = useNavigate(); 
   const itemsPerPage = 3;
+  const deliveryFee = 50000; // Fixed delivery fee for this example
   const { removeSelectedProduct } = useStoreproduct((state) => ({
     removeSelectedProduct: state.removeSelectedProduct,
   }));
@@ -26,11 +30,30 @@ const Order = () => {
     return savedProducts ? JSON.parse(savedProducts) : [];
   });
 
+  useEffect(() => {
+    const fetchPaymentOptions = async () => {
+      try {
+        const response = await getpay();
+        setPaymentOptions(response.data);
+      } catch (error) {
+        console.error('Error fetching payment options:', error);
+      }
+    };
+
+    fetchPaymentOptions();
+  }, []);
+
+  const handlePaymentChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
   // Menghitung total harga
-  const totalPrice = products.reduce(
+  const totalProductPrice = products.reduce(
     (acc, product) => acc + product.price * product.quantity,
     0
   );
+  
+  const totalAmount = totalProductPrice + deliveryFee;
 
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
@@ -51,7 +74,7 @@ const Order = () => {
     localStorage.setItem('cartProducts', JSON.stringify(updatedProducts));
   };
 
-  const handleCreateOrderItem = async () => {
+  const handleCreateOrder = async () => {
     if (!token) {
       alert('Token is missing. Please login again.');
       return;
@@ -62,28 +85,36 @@ const Order = () => {
       return;
     }
 
+    if (!paymentMethod) {
+      alert('Please select a payment method.');
+      return;
+    }
+
     // Cek jika semua field alamat terisi
-    if (!address.kecamatan || !address.kelurahan || !address.kabupaten) {
+    if (!address.kecamatan || !address.kelurahan || !address.kabupaten || !address.alamat) {
       alert('Please fill in your address before creating an order.');
       return;
     }
 
     const payload = {
       products: products.map(product => ({
-        Nama: product.name,
-        Harga: product.price,
+        name: product.name, // Pastikan nama field sesuai dengan controller
+        price: product.price,
         quantity: product.quantity
       })),
       deliveryAddress: {
-        kecamatan: address.kecamatan, // Pastikan nama properti sesuai dengan schema
+        kecamatan: address.kecamatan,
         kelurahan: address.kelurahan,
-        kabupaten: address.kabupaten
+        kabupaten: address.kabupaten,
+        alamat: address.alamat
       },
-      totalAmount: totalPrice // Mengirimkan totalAmount, bukan totalPrice
+      totalProductPrice: totalProductPrice,
+      totalAmount: totalAmount,
+      payment_id: paymentMethod
     };
 
     try {
-      const response = await postordersItem(payload, token);
+      const response = await createOrder(payload, token);
       console.log(response);
       alert('Order created successfully!');
       navigate('/Invoice'); 
@@ -103,14 +134,13 @@ const Order = () => {
 
   // Simulasi data loading
   useEffect(() => {
-    // Simulasi loading
     setTimeout(() => {
       setLoading(false);
     }, 1000); // Ganti dengan waktu loading yang sesuai
   }, []);
 
   if (loading) {
-    return <Loading />; // Menampilkan halaman loading saat data sedang dimuat
+    return <Loading />;
   }
 
   return (
@@ -172,6 +202,19 @@ const Order = () => {
       <div className='boxOrder'>
         <div className='boxorder1'>
           <h1>Your Cart</h1>
+          <div className="textareaContainer">
+            <label htmlFor="orderNotes">Add notes to your order:</label>
+            <textarea 
+              id="alamat" 
+              placeholder="Isi alamat kamu "
+              value={address.alamat}
+              required 
+              onChange={handleChange}
+              rows="4" 
+              cols="50"
+            />
+          </div>
+
           {currentProducts.length > 0 ? (
             <>
               <table className="productTable">
@@ -216,14 +259,27 @@ const Order = () => {
               />
             </>
           ) : (
-            <p>Your cart is empty.</p>
+            <p style={{ fontSize: '10px', color: 'black', fontFamily: 'Rubik Mono One, monospace' }}>Your cart is empty.</p>
           )}
         </div>
         <div className='boxorder2'>
           <h1>Order Summary</h1> 
-          <h2> Check your order and the address you entered before placing your order.</h2>
-          <h3>Total Price: ${totalPrice}</h3> {/* Menampilkan total harga */}
-          <button onClick={handleCreateOrderItem}>Create Order</button>
+          <h2>Check your order and the address you entered before placing your order.</h2>
+          <h3>Total Product Price: ${totalProductPrice}</h3>
+          <h3>Delivery Fee: ${deliveryFee}</h3>
+          <h3>Total Amount: ${totalAmount}</h3>
+          <div className="paymentMethods">
+            <label htmlFor="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" value={paymentMethod} onChange={handlePaymentChange}>
+              <option value="">Select Payment Method</option>
+              {paymentOptions.map(option => (
+                <option key={option._id} value={option._id}>
+                  {option.Name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button className='OrderButton' onClick={handleCreateOrder}>Confirm Order</button>
         </div>
       </div>
     </div>

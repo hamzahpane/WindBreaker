@@ -9,6 +9,13 @@ export async function getOrders(token) {
     });
 };
 
+export async function createOrder(payload, token) {
+  return await axios.post('http://localhost:4000/api/postorders', payload, {
+  headers: {
+      Authorization: `Bearer ${token}`
+  }
+  });
+};
 
 export async function deleteOrder(id, token) {
     try {

@@ -9,6 +9,7 @@
     
 }
 
+
 /* Tambahkan ini di file CSS yang sesuai, misalnya 'order.css' */
 .spinner {
     position: fixed;
@@ -120,7 +121,7 @@
 }
 
 .boxorder2{
-    height: 200px;
+    height: 300px;
     padding: 20px; /* Padding dalam box */
     color: white;
     border-radius: 10px; /* Menambahkan border radius agar terlihat lebih modern */
@@ -225,5 +226,61 @@
     border-radius: 5px;
     font-size: 16px;
     text-align: center;
+    }
+
+    .textareaContainer {
+    margin: 10px 0;
+        font-size: 10px;
+        color: black;
+        font-family: "Rubik Mono One", monospace;
+    }
+   
+    .textareaContainer textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5PX;
+    border: 1px solid #ccc;
+    font-size: 8PX;
+    resize: none;
+  }
+  
+
+  /* .payment-section{
+    margin-top: 20px;
+    font-size: 12px;
+    font-family: "Rubik Mono One", monospace;
+
+  } */
+
+  .payment-section {
+    margin: 20px 0;
+  }
+  
+  .payment-section label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .payment-section select {
+    width: 100%;
+    max-width: 300px; /* Atur lebar maksimum sesuai kebutuhan */
+    padding: 8px 12px;
+    font-size: 8px;
+    font-family: "Rubik Mono One", monospace;
+    border: 1px solid black;
+    border-radius: 4px;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+  }
+  
+  .payment-section select:focus {
+    border-color: black; /* Ganti warna border saat fokus */
+    outline: none;
+    box-shadow: 0 0 0 2px black;
   }
   

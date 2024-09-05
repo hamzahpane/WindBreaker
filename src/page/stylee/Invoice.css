@@ -29,8 +29,8 @@
   font-family: "Rubik Mono One", monospace;
   padding: 10px 10px;
   border: 1px solid rgb(0, 0, 0); 
-  color: black;
-  background-color: white; 
+  color: white;
+  background-color: black; 
   border-radius: 10px;
   cursor: pointer;
 }
@@ -52,4 +52,41 @@
   border-radius: 5px;
   width: 98%;
   
+}
+
+.invoicontainer{
+  padding: 20px;
+}
+
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table th, .invoice-table td {
+  border: 1px solid black;
+  padding: 8px;
+  font-size: 10px;
+  font-family: "Rubik Mono One", monospace;
+  text-align: left;
+}
+
+.invoice-table th {
+  background-color: black;
+  font-size: 12px;
+  font-family: "Rubik Mono One", monospace;
+  color: white;
+}
+
+.submit-button{
+  font-family: "Rubik Mono One", monospace;
+  margin-top: 10px;
+  border: none;
+  background: black;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 20px;
+  font-size: 12px;
 }
